@@ -1,6 +1,8 @@
 = require-magic
 
-Description goes here.
+Utility functions to facilitate importing (require) ruby files in complex Ruby project, such as gem with complex folder hierarchies. 
+
+NOTE: Needs testing
 
 == Note on Patches/Pull Requests
  

@@ -1,0 +1,18 @@
+14-11-2009
+----------
+* Initial release with two helper functions:
+
+- Require.folder(name, options)
+
+name    : the name (or path) of a top-level folder. 
+options : a hash containing specific options for applying the require (all optional)
+          :include      - regular expression to match on .rb filenames to require 
+          :exclude      - regular expression to match on .rb filenames to NOT require
+          :recursive    - whether to do a recursive traversal of directories
+          :folder_list  - list of folders under main folder (name argument) to process (in list order)
+
+TODO:
+Needs testing          
+             
+
+

@@ -5,12 +5,13 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "require-magic"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{utility to facilitate require of .rb files and folders}
+    gem.description = %Q{utility to facilitate require of .rb files and folders}
     gem.email = "kmandrup@gmail.com"
     gem.homepage = "http://github.com/kristianmandrup/require-magic"
     gem.authors = ["Kristian Mandrup"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
+    gem.files.exclude 'test'        
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
