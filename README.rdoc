@@ -1,8 +1,8 @@
 = require-magic
 
 Utility functions to facilitate importing (require) ruby files in complex Ruby project, such as gem with complex folder hierarchies. 
-
-NOTE: Needs testing
+See unit tests in /test directory to see how to use the tools for the best effect.
+Using this toolset should really simplify your require statements and make your application more flexible to change.
 
 == Note on Patches/Pull Requests
  

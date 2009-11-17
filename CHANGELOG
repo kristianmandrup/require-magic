@@ -1,3 +1,7 @@
+17-11-2009
+----------
+Created unit tests to ensure all util functions work as expected. Fixed a number of bugs.
+
 14-11-2009
 ----------
 * Initial release with two helper functions:
@@ -10,9 +14,6 @@ options : a hash containing specific options for applying the require (all optio
           :exclude      - regular expression to match on .rb filenames to NOT require
           :recursive    - whether to do a recursive traversal of directories
           :folder_list  - list of folders under main folder (name argument) to process (in list order)
-
-TODO:
-Needs testing          
              
 
 
