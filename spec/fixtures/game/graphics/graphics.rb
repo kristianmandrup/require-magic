@@ -1,0 +1,1 @@
+puts "Graphics was included"

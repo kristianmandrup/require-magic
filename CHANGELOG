@@ -1,3 +1,8 @@
+03-02-2010
+----------
+Added a powerful require DSL
+
+
 17-11-2009
 ----------
 Created unit tests to ensure all util functions work as expected. Fixed a number of bugs.

@@ -1,27 +1,45 @@
-require 'rubygems'
-require 'singleton'
-class Require
-  include Singleton
+require 'require-dsl'
+
+module Require
   
   class << self
     attr_accessor :base_path
     attr_accessor :tracing
     attr_accessor :verbose
   end
-  def self.rfolder(name, options = {})
+
+  def self.recursive(*names, options, &block)
+    options = {} if !options     
     options[:recursive] = true
-    folder(name, options)    
+    names.each{|name| folder(name, options) }
   end
   
+  def self.folders(*names, options)
+    options = {} if !options 
+    required_files = []
+    names.each do |path| 
+      options[:root] = path if is_root?(path, options) 
+      required_files << folder(path, options)
+    end
+    required_files.flatten
+  end
+
+  def self.enter(name, options = {}, &block)
+    options[:recursive] = true
+    file  folder(name, options)
+    yield File.dirname(file)    
+  end
+
+
   def self.folder(name, options = {})
     recursive = options[:recursive]
     folder_list = options[:folders]
     file_pattern =  recursive ? "#{name}/**/*.rb" : "#{name}/*.rb" 
-    
+  
     base_dir = File.dirname(__FILE__)
-    
+  
     curr_base_path = options[:base_path] || base_path || base_dir
-    
+  
     # puts "base_path: #{curr_base_path}, base_dir:#{base_dir}, :base_path #{base_path}"
 
     path = File.join(curr_base_path, file_pattern)
@@ -39,22 +57,7 @@ class Require
       # options[:root] = false      
     end
     required_files.flatten
-  end
-
-  def self.rfolders(folder_list, options = {}) 
-    options[:recursive] = true
-    folders(folder_list, options)    
-  end
-    
-
-  def self.folders(folder_list, options = {})
-    required_files = []
-    folder_list.each do |path| 
-      options[:root] = path if is_root?(path, options) 
-      required_files << folder(path, options)
-    end
-    required_files.flatten
-  end
+  end    
 
 protected
   def self.puts_trace(txt, options)
