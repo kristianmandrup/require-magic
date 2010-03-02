@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{require-magic}
-  s.version = "0.1.0"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2009-11-15}
-  s.description = %q{utility to facilitate require of .rb files and folders}
+  s.date = %q{2009-11-19}
+  s.description = %q{enhance your ruby app with require magic to more easily define how to include hierarchies of ruby files, and also apply inclusion/exclusion filters for what to include}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -19,11 +19,13 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
      ".gitignore",
+     "CHANGELOG",
      "LICENSE",
      "README.rdoc",
      "Rakefile",
      "VERSION",
      "lib/require-magic.rb",
+     "require-magic.gemspec",
      "spec/require-magic_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
@@ -36,8 +38,13 @@ Gem::Specification.new do |s|
   s.test_files = [
     "spec/require-magic_spec.rb",
      "spec/spec_helper.rb",
-     "test/test_require_magic.rb"
+     "test/test_require_folder.rb",
+     "test/test_require_folders.rb",
+     "test/test_require_folders_adv.rb",
+     "test/unit_test_require.rb"
   ]
+
+  s.has_rdoc = 'yard'
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

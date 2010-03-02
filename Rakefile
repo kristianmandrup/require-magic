@@ -6,7 +6,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "require-magic"
     gem.summary = %Q{utility to facilitate require of .rb files and folders}
-    gem.description = %Q{utility to facilitate require of .rb files and folders}
+    gem.description = %Q{enhance your ruby app with require magic to more easily define how to include hierarchies of ruby files, and also apply inclusion/exclusion filters for what to include}
     gem.email = "kmandrup@gmail.com"
     gem.homepage = "http://github.com/kristianmandrup/require-magic"
     gem.authors = ["Kristian Mandrup"]

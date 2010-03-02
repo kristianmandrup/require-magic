@@ -4,6 +4,48 @@ Utility functions to facilitate importing (require) ruby files in complex Ruby p
 See unit tests in /test directory to see how to use the tools for the best effect.
 Using this toolset should really simplify your require statements and make your application more flexible to change.
 
+== USAGE
+See unit tests for demonstrations of how to use it:
+
+Set basepath to use for require
+* required_files = Require.base_path = File.dirname(__FILE__)
+
+To require all files within the top level folder 'data' (non-recursively)
+* required_files = Require.folder('data')
+
+Override base_path
+* required_files = Require.folder('data', {:base_path => File.dirname(__FILE__) + '/../my/path})
+
+The required_files returned is a list of the paths of the files that were required 
+
+To require all files within the top level folder 'data' (non-recursively) and apply tracing to see output for the process of requiring the files
+* required_files = Require.folder('data')
+
+To require all files within the top level folder 'data' recursively 
+* required_files = Require.rfolder('data')
+
+To require all files within the top level folders 'data' and 'data2' (non-recursively) 
+* required_files = Require.rfolders(['data', 'data2'])
+
+To require all files within the top level folders 'data' and 'data2' recursively 
+* required_files = Require.rfolders(['data', 'data2'])
+
+To require files within the top level folders 'data' and 'data2' and also files within the subdirectory 'blip' if it exists 
+* required_files = Require.folders(['data', 'data2'], {:folders => ['blip]})
+
+To require files within 'data/blip' and 'data2/blip' only
+* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :ignore_root_files => true})
+
+To require files within 'data' and 'data2' first and then any files within the subdirectory 'blip' (default order)
+* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
+
+To require files within 'data/blip' and 'data2/blip' first and then any files within 'data' and 'data2' folders
+* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :after})
+
+To require files within 'data' and 'data2' first and then any files within the subdirectory 'blip'
+* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
+
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
