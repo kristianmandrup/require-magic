@@ -14,7 +14,7 @@ begin
     gem.files = FileList['lib/**/*.rb']
     # gem.add_dependency 
   end
-  Jeweler::GemcutterTasks.new
+  # Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end             
