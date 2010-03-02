@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'singleton'
 class Require
   include Singleton
