@@ -39,27 +39,37 @@ module Require
     end
     
     def except(*reg_exps) 
-      self.each do |file|    
-        reg_exps.each {|re| self.delete(file) if file.match(re) }         
+      duplicate = self.dup.extend(MagicList)  
+      duplicate.each do |file|    
+        reg_exps.each {|re| duplicate.delete(file) if file.match(re) }         
       end
-      self
+      duplicate
     end        
 
     def postfix_rb(str)
       str << '.rb' if !str.include? '.rb'            
     end            
+
+    def fix(str)   
+      postfix_rb(str) 
+      str = Regexp.escape(str)
+      str.gsub! '\*', '[a-zA-Z0-9\s_-]*'
+      str.gsub! '/', '\/'
+      str
+    end
     
     def matching(*reg_exps) 
+      duplicate = self.dup.extend(MagicList)  
       keep_list = []
-      each do |file| 
+      duplicate.each do |file| 
         reg_exps.each do |re|
-          postfix_rb(re) if re.kind_of? String
+          re = fix(re) if re.kind_of? String
           keep_list << file if file.match(re)
         end
       end                              
-      reject_list = (self - keep_list).flatten
-      delete_these(reject_list)
-      self
+      reject_list = (duplicate - keep_list).flatten
+      duplicate.delete_these(reject_list)
+      duplicate
     end    
   end
 
@@ -90,7 +100,7 @@ module Require
       list.extend(MagicList)  
       list.base_path = dir_stack.first 
       list.rel_path = current_path    
-      list
+      list.freeze
     end
         
   end
