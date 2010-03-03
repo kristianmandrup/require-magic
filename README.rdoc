@@ -58,18 +58,21 @@ end
 See unit tests for demonstrations of how to use it:
 
 # Set basepath to use for require
+
 required_files = Require.base_path = File.dirname(__FILE__)
 
 
 # To require all files within the top level folder 'data' (non-recursively)
+
 required_files = Require.folders('data')
 
 
 # Override base_path
+
 required_files = Require.folders('data', {:base_path => File.dirname(__FILE__) + '/../my/path})
 
-
 # The required_files returned is a list of the paths of the files that were required
+
 # To require all files within the top level folder 'data' (non-recursively) and apply tracing to see output for the process of requiring the files
 
 required_files = Require.folder 'data'
