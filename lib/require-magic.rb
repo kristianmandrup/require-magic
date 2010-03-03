@@ -26,8 +26,9 @@ module Require
 
   def self.enter(name, options = {}, &block)
     options[:recursive] = true
-    file  folder(name, options)
-    yield File.dirname(file)    
+    file = folder(name, options)
+    base_path = File.dirname(file)
+    yield base_path    
   end
 
 
@@ -123,18 +124,20 @@ protected
     end
   end
 
-  def self.match(f, rexp)
-    if rexp.kind_of? String
-      rexp = /#{Regexp.escape(rexp)}/
-    end
-      
-    if rexp.kind_of? Array
-      rexp.each{|e| return true if match(f, rexp)}
+  def self.match(f, *rexp)      
+      rexp.each{|e| return true if match_single(f, rexp)}
       false
-    elsif rexp.kind_of? Regexp  
-      match_res = (f =~ rexp)
-      !match_res.nil?
-    end
   end
-
+  
+  def self.match_single(f, rexp)
+    if rexp.kind_of? String
+      str = Regexp.escape(str)
+      str.gsub! '\*', '[a-zA-Z0-9\s_-]*'
+      str.gsub! '/', '\/'      
+    end
+    if rexp.kind_of? Regexp  
+      return f.match(re)
+    end    
+    false
+  end
 end
