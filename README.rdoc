@@ -11,6 +11,7 @@ require 'require_dsl'  # alternatively only include require_dsl (the DSL languag
 
 
 # enter subfolder 'mira'
+
 Folder.enter 'mira' do |folder|
   # from new location, enter a subdir
   folder.enter 'subdir' do |path|  # mira/subdir      
@@ -42,6 +43,7 @@ end
 
 
 # use current path as folder
+
 Folder.enter do |folder| 
   folder.all('**/*.rb').require
   folder.enter 'game' do |path|
