@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{require-magic}
-  s.version = "0.5.1"
+  s.version = "0.5.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
-    "README.rdoc"
+    "README.textile"
   ]
   s.files = [
     "lib/require-dsl.rb",
