@@ -2,18 +2,24 @@ require 'rake'
 require 'fileutils'
 require 'util/util'
 
-module Require
+module Folder
 
-  def self.magic(path, &block) 
-    yield Magic.new path
+  def self.enter(path = '.', &block) 
+    m = Magic.new 
+    m.enter path      
+    yield m
+    m.dir_stack.pop 
   end
   
   module MagicList 
     attr_accessor :base_path
     attr_accessor :rel_path
         
-    def require(file)
-      require file
+    def do_require
+      each do |file|
+        require file
+      end 
+      self
     end
 
     def show_require(*options)
@@ -77,25 +83,25 @@ module Require
     attr_accessor :current_path
     attr_accessor :dir_stack
     
-    def initialize(dir)      
+    def initialize      
       @dir_stack = []
       @current_path = FileUtils.pwd
-      @current_path = enter(dir)      
     end
     
     def enter(dir)       
       FileUtils.cd dir
-      dir_stack.push path = FileUtils.pwd 
+      dir_stack.push path = FileUtils.pwd   
       @current_path = path
       if block_given?
-        yield path
-         dir_stack.pop            
-         current_path = dir_stack.last
+        yield path            
+        current_path = dir_stack.last
+        old_dir = dir_stack.last if dir_stack.pop 
+        FileUtils.cd old_dir if old_dir               
       end      
       path
     end
 
-    def require_all(*globs)      
+    def all(*globs)      
       list = FileList.new(globs)
       list.extend(MagicList)  
       list.base_path = dir_stack.first 

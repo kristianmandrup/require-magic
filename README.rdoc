@@ -11,31 +11,33 @@ require 'require_magic'
 # alternatively to only include require_dsl
 require 'require_dsl'
 
-Require.magic [path relative to current file location] do |magic|
+Folder.enter [path relative to current file location] do |folder|
   # from new location, enter a subdir
-  magic.enter [subdir] do |path|        
-    magic.require_all('**/*.rb').except(/sound\/*.rb/).require  
+  folder.enter [subdir] do |path|        
+    folder.all('**/*.rb').except(/sound\/*.rb/).require  
   end
 
   # from new location, enter a subdir
-  magic.enter [another subdir] do |path|           
+  folder.enter [another subdir] do |path|           
     # use file blobs here
-    magic.require_all('**/*.rb').require
+    folder.all('**/*.rb').require
   end
 
   # from new location, enter a subdir
-  magic.enter [yet another subdir] do |path|         
+  folder.enter [yet another subdir] do |path|         
     # matching and except are to be used as include and exclude filters
     # they each take a list containing regular expressions and strings
     # string arguments are postfixed with .rb internally if not present  
-    magic.require_all('blip/**/*.rb').matching(/_mixin.rb/, /.*\/power/).except(/sound/, /disco/).require
+    folder.all('blip/**/*.rb').matching(/_mixin.rb/, /.*\/power/).except(/sound/, /disco/).require
   end
 
 end
 
-Require.magic '../spec/fixtures' do |magic|
-  magic.enter 'game' do |path|
-    list = magic.require_all('**/*.rb')    
+# use current path as folder
+Folder.enter do |folder| 
+  folder.all('**/*.rb').require
+  folder.enter 'game' do |path|
+    list = folder.all('**/*.rb')    
     # puts list.matching('sound', 'network').except(/sound/).show_require(:relative)
     list.matching('sound', 'network').except(/sound/).require
   end
