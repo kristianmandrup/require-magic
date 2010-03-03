@@ -170,7 +170,6 @@ To require files within 'data' and 'data2' first and then AFTER any files within
 required_files = Require.folders 'data', 'data2', {:folders => 'blip', :root_files => :before}  
 </pre>
 
-
 To require files within 'data/blip' and 'data2/blip' first and then AFTER any files within 'data' and 'data2' folders (the root files)
 <pre>
 required_files = Require.folders(['data', 'data2'], {:folders => 'blip', :root_files => :after})
