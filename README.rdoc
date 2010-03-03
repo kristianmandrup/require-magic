@@ -6,31 +6,30 @@ Using this toolset should really simplify your require statements and make your 
 
 == USAGE  
 
-<pre><code>
 require 'require_magic' # include both the old static require helpers and the DSL require language
 require 'require_dsl'  # alternatively only include require_dsl (the DSL language)
 
-Folder.enter [path relative to current file location] do |folder|
+Folder.enter do |folder|
   # from new location, enter a subdir
-  folder.enter [subdir] do |path|        
+  folder.enter 'subdir' do |path|        
     folder.all('**/*.rb').except(/sound\/*.rb/).require  
   end
 
   # from new location, enter a subdir
-  folder.enter [another subdir] do |path|           
+  folder.enter 'another/subdir' do |path|           
     # use file blobs here
     folder.all('**/*.rb').require
   end
 
   # from new location, enter a subdir
-  folder.enter [yet another subdir] do |path|         
+  folder.enter 'a_subdir' do |path|         
     # matching and except are to be used as include and exclude filters
     # they each take a list containing regular expressions and strings
     # string arguments are postfixed with .rb internally if not present  
     folder.all('blip/**/*.rb').matching(/_mixin.rb/, /.*\/power/).except(/sound/, /disco/).require
     
-    folder.enter [subdir] do |path|         
-      folder.enter [subdir] do |path|         
+    folder.enter 'sub_a' do |path|         
+      folder.enter 'sub_b' do |path|         
         folder.all('grusch/**/*.rb').require
       end
 
@@ -41,6 +40,7 @@ Folder.enter [path relative to current file location] do |folder|
 end
 
 # use current path as folder
+
 Folder.enter do |folder| 
   folder.all('**/*.rb').require
   folder.enter 'game' do |path|
@@ -49,73 +49,72 @@ Folder.enter do |folder|
     list.matching('sound', 'network').except(/sound/).require
   end
 end
-</code></pre>
 
 == Static helpers
 See unit tests for demonstrations of how to use it:
 
 # Set basepath to use for require
-<code>
+
 required_files = Require.base_path = File.dirname(__FILE__)
-</code>
+
 
 To require all files within the top level folder 'data' (non-recursively)
-<code>
+
 required_files = Require.folders('data')
-</code>
+
 
 Override base_path
-<code>
+
 required_files = Require.folders('data', {:base_path => File.dirname(__FILE__) + '/../my/path})
-</code>
+
 
 The required_files returned is a list of the paths of the files that were required 
 
 To require all files within the top level folder 'data' (non-recursively) and apply tracing to see output for the process of requiring the files
-<code>
+
 required_files = Require.folder 'data'
 required_files = Require.folders 'data'
-</code>
+
 
 To require all files within the top level folder 'data' recursively 
-<code>
+
 required_files = Require.recursive('data')
-</code>
+
 
 To require all files within the top level folders 'data' and 'data2' (non-recursively) 
-<code>
+
 required_files = Require.recursive(['data', 'data2'])
-</code>
+
 
 To require all files within the top level folders 'data' and 'data2' recursively 
-<code>
+
 required_files = Require.recursive(['data', 'data2'])
-</code>
+
 
 To require files within the top level folders 'data' and 'data2' and also files within the subdirectory 'blip' if it exists 
-<code>
+
 required_files = Require.folders(['data', 'data2'], {:folders => ['blip]})
-</code>
+
 
 To require files within 'data/blip' and 'data2/blip' only, NOT including the root files
-<code>
+
 required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :ignore_root_files => true})
-</code>
+
 
 To require files within 'data' and 'data2' first and then AFTER any files within the subdirectory 'blip' (default order)
-<code>
+
 required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
-</code>
+
 
 To require files within 'data/blip' and 'data2/blip' first and then AFTER any files within 'data' and 'data2' folders (the root files)
-<code>
+
 required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :after})
-</code>
+
 
 To require files within 'data' and 'data2' (the root files) first (BEFORE) and then any files within the subdirectory 'blip'
-<code>
+
 required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
-</code>
+
 
 == Copyright
 
