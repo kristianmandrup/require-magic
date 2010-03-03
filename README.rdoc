@@ -4,12 +4,11 @@ Utility functions to facilitate importing (require) ruby files in complex Ruby p
 See unit tests in /test directory to see how to use the tools for the best effect.
 Using this toolset should really simplify your require statements and make your application more flexible to change.
 
-== USAGE
+== USAGE  
 
-require 'require_magic'
-
-# alternatively to only include require_dsl
-require 'require_dsl'
+<code>
+require 'require_magic' # include both the old static require helpers and the DSL require language
+require 'require_dsl'  # alternatively only include require_dsl (the DSL language)
 
 Folder.enter [path relative to current file location] do |folder|
   # from new location, enter a subdir
@@ -29,6 +28,14 @@ Folder.enter [path relative to current file location] do |folder|
     # they each take a list containing regular expressions and strings
     # string arguments are postfixed with .rb internally if not present  
     folder.all('blip/**/*.rb').matching(/_mixin.rb/, /.*\/power/).except(/sound/, /disco/).require
+    
+    folder.enter [subdir] do |path|         
+      folder.enter [subdir] do |path|         
+        folder.all('grusch/**/*.rb').require
+      end
+
+    end
+    folder.all.require    
   end
 
 end
@@ -42,61 +49,73 @@ Folder.enter do |folder|
     list.matching('sound', 'network').except(/sound/).require
   end
 end
+</code>
 
-
-== USAGE (Deprecated)
+== Static helpers
 See unit tests for demonstrations of how to use it:
 
-Set basepath to use for require
-* required_files = Require.base_path = File.dirname(__FILE__)
+# Set basepath to use for require
+<code>
+required_files = Require.base_path = File.dirname(__FILE__)
+</code>
 
 To require all files within the top level folder 'data' (non-recursively)
-* required_files = Require.folders('data')
+<code>
+required_files = Require.folders('data')
+</code>
 
 Override base_path
-* required_files = Require.folders('data', {:base_path => File.dirname(__FILE__) + '/../my/path})
+<code>
+required_files = Require.folders('data', {:base_path => File.dirname(__FILE__) + '/../my/path})
+</code>
 
 The required_files returned is a list of the paths of the files that were required 
 
 To require all files within the top level folder 'data' (non-recursively) and apply tracing to see output for the process of requiring the files
-* required_files = Require.folder 'data'
-* required_files = Require.folders 'data'
+<code>
+required_files = Require.folder 'data'
+required_files = Require.folders 'data'
+</code>
 
 To require all files within the top level folder 'data' recursively 
-* required_files = Require.recursive('data')
+<code>
+required_files = Require.recursive('data')
+</code>
 
 To require all files within the top level folders 'data' and 'data2' (non-recursively) 
-* required_files = Require.recursive(['data', 'data2'])
+<code>
+required_files = Require.recursive(['data', 'data2'])
+</code>
 
 To require all files within the top level folders 'data' and 'data2' recursively 
-* required_files = Require.recursive(['data', 'data2'])
+<code>
+required_files = Require.recursive(['data', 'data2'])
+</code>
 
 To require files within the top level folders 'data' and 'data2' and also files within the subdirectory 'blip' if it exists 
-* required_files = Require.folders(['data', 'data2'], {:folders => ['blip]})
+<code>
+required_files = Require.folders(['data', 'data2'], {:folders => ['blip]})
+</code>
 
 To require files within 'data/blip' and 'data2/blip' only, NOT including the root files
-* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :ignore_root_files => true})
+<code>
+required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :ignore_root_files => true})
+</code>
 
 To require files within 'data' and 'data2' first and then AFTER any files within the subdirectory 'blip' (default order)
-* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
+<code>
+required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
+</code>
 
 To require files within 'data/blip' and 'data2/blip' first and then AFTER any files within 'data' and 'data2' folders (the root files)
-* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :after})
+<code>
+required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :after})
+</code>
 
 To require files within 'data' and 'data2' (the root files) first (BEFORE) and then any files within the subdirectory 'blip'
-* required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
-
-
-== Note on Patches/Pull Requests
- 
-* Fork the project.
-* Make your feature addition or bug fix.
-* Add tests for it. This is important so I don't break it in a
-  future version unintentionally.
-* Commit, do not mess with rakefile, version, or history.
-  (if you want to have your own version, that is fine but
-   bump version in a commit by itself I can ignore when I pull)
-* Send me a pull request. Bonus points for topic branches.
+<code>
+required_files = Require.folders(['data', 'data2'], {:folders => ['blip], :root_files => :before})
+</code>
 
 == Copyright
 

@@ -19,7 +19,7 @@ describe "RequireMagic" do
     Folder.enter do |folder|
       puts folder.current_path
       folder.enter 'game' do |path|
-        list = folder.all('**/*.rb')                                                    
+        list = folder.all # ('**/*.rb')                                                    
         l1 = list.matching( 'sound', 'network').except(/sound/).show_require(:relative).inspect        
         l1.should include("network/network.rb")
   

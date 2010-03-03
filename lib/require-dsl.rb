@@ -101,7 +101,8 @@ module Folder
       path
     end
 
-    def all(*globs)      
+    def all(*globs)
+      globs = '**/*.rb' if globs.empty?      
       list = FileList.new(globs)
       list.extend(MagicList)  
       list.base_path = dir_stack.first 
