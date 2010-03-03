@@ -6,7 +6,7 @@ Using this toolset should really simplify your require statements and make your 
 
 == USAGE  
 
-<code>
+<pre><code>
 require 'require_magic' # include both the old static require helpers and the DSL require language
 require 'require_dsl'  # alternatively only include require_dsl (the DSL language)
 
@@ -49,7 +49,7 @@ Folder.enter do |folder|
     list.matching('sound', 'network').except(/sound/).require
   end
 end
-</code>
+</code></pre>
 
 == Static helpers
 See unit tests for demonstrations of how to use it:
