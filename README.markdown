@@ -1,7 +1,8 @@
 # Require-Me ##
 
 Includes a DSL for requiring files and folders and some also some static utility functions which can be used in combination. 
-These tools in combination facilitates managing requiring various subfolder structures. 
+These tools in combination facilitates managing requiring various subfolder structures.
+FIXED 
 
 ## Require DSL ##
   
