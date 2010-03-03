@@ -9,9 +9,11 @@ Using this toolset should really simplify your require statements and make your 
 require 'require_magic' # include both the old static require helpers and the DSL require language
 require 'require_dsl'  # alternatively only include require_dsl (the DSL language)
 
-Folder.enter do |folder|
+
+# enter subfolder 'mira'
+Folder.enter 'mira' do |folder|
   # from new location, enter a subdir
-  folder.enter 'subdir' do |path|        
+  folder.enter 'subdir' do |path|  # mira/subdir      
     folder.all('**/*.rb').except(/sound\/*.rb/).require  
   end
 
@@ -29,18 +31,17 @@ Folder.enter do |folder|
     folder.all('blip/**/*.rb').matching(/_mixin.rb/, /.*\/power/).except(/sound/, /disco/).require
     
     folder.enter 'sub_a' do |path|         
-      folder.enter 'sub_b' do |path|         
+      folder.enter 'sub_b' do |path| # a_subdir/sub_a/sub_b         
         folder.all('grusch/**/*.rb').require
       end
 
     end
     folder.all.require    
   end
-
 end
 
-# use current path as folder
 
+# use current path as folder
 Folder.enter do |folder| 
   folder.all('**/*.rb').require
   folder.enter 'game' do |path|
@@ -49,6 +50,7 @@ Folder.enter do |folder|
     list.matching('sound', 'network').except(/sound/).require
   end
 end
+
 
 == Static helpers
 See unit tests for demonstrations of how to use it:
