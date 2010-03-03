@@ -1,9 +1,9 @@
-# Require-Me
+# Require-Me ##
 
 Includes a DSL for requiring files and folders and some also some static utility functions which can be used in combination. 
 These tools in combination facilitates managing requiring various subfolder structures. 
 
-## Require DSL
+## Require DSL ##
   
 The following example code demonstrates how to use the Require DSL
 
@@ -39,9 +39,9 @@ Folder.enter 'mira' do |folder| # enter subfolder 'mira'
 end  
 </pre>
 
-If no argument, current path is used as initial folder 
+If no argument, current path is used as initial folder
+ 
 <pre>
-
 Folder.enter do |folder| # use current path as folder
   folder.all('**/*.rb').require
   folder.enter 'game' do |path|
@@ -59,11 +59,11 @@ Folder.enter do |folder| # use current path as folder
 end
 </pre>
 
-## Static helpers
+## Static helpers ##
 
 Unit tests demonstrations how to use the static helpers (tests currently broken due to missing data files!):
 
-### Setting the base path
+### Setting the base path ##
 
 Setting global base_path
 <pre>
@@ -78,7 +78,7 @@ Require.enter 'sound' do |path|
 end
 </pre>
 
-#### Override base_path
+#### Override base_path ##
 
 <pre>
 Require.folders 'data', {:base_path => File.dirname(__FILE__) + '/../my/path}
@@ -91,17 +91,15 @@ Require.folders 'data', 'data2'
 Require.recursive 'data', 'data2' # recursively require all in subtrees
 </pre>
 
-### Simple debugging
+### Simple debugging ##
 
-Get list of required files
+Get list of required files and print them
 <pre>
-\# Require all files within the top level folder 'data' (non-recursively) 
-\# The required_files returned is a list of the paths of the files that were required
 required_files = Require.folder 'data'
 puts required_files  
 </pre>
 
-### Tracing mode (for debugging)
+### Tracing mode (for debugging) ##
 
 Apply tracing to see output for the process of requiring the files
 <pre>  
@@ -111,6 +109,7 @@ Apply tracing to see output for the process of requiring the files
 </pre>
 
 Alternatively pass tracing as an option 
+
 <pre>
 Require.folder 'data', {:tracing => :on}  
 </pre>
@@ -142,7 +141,7 @@ Require all files within the top level folders 'data' and 'data2' recursively
 required_files = Require.recursive 'data', 'data2'
 </pre>
 
-### Require.folders
+### Require.folders ##
 
 Require files within the top level folders 'data' and 'data2' and also files within the subdirectory 'blip' if it exists 
 <pre>
