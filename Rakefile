@@ -3,7 +3,7 @@
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "require-magic"
+    gem.name = "require-me"
     gem.summary = %Q{Facilitates requiring select ruby files in folders}
     gem.description = %Q{Lets you easily define how to include hierarchies of ruby files, and also apply inclusion/exclusion filters for what to include}
     gem.email = "kmandrup@gmail.com"

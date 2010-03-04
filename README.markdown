@@ -9,9 +9,7 @@ FIXED
 The following example code demonstrates how to use the Require DSL
 
 <pre>
-require 'require_me' # include both the static require helpers and the DSL require language
-require 'require_dsl'  # alternatively only include require_dsl (the DSL language)
-
+require 'require-dsl'  # to include the Require DSL language only
 
 Folder.enter 'mira' do |folder| # enter subfolder 'mira'
   `# from new location, enter a subdir`
@@ -43,6 +41,8 @@ end
 If no argument, current path is used as initial folder
  
 <pre>
+require 'require-me' # include both the static require helpers and the DSL require language  
+  
 Folder.enter do |folder| # use current path as folder
   folder.all('**/*.rb').require
   folder.enter 'game' do |path|
