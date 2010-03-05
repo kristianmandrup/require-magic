@@ -93,12 +93,12 @@ module Folder
       dir_stack.push path = FileUtils.pwd   
       @current_path = path
       if block_given?
-        yield path            
+        yield self            
         current_path = dir_stack.last
         old_dir = dir_stack.last if dir_stack.pop 
         FileUtils.cd old_dir if old_dir               
       end      
-      path
+      self
     end
 
     def all(*globs)
@@ -108,6 +108,10 @@ module Folder
       list.base_path = dir_stack.first 
       list.rel_path = current_path    
       list.freeze
+    end
+
+    def require_all
+      all.dup.extend(MagicList).do_require
     end
         
   end

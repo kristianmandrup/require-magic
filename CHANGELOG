@@ -1,7 +1,12 @@
-03-02-2010
+05-03-2010
+----------
+* Fixed minor issue with enter method to yield self, not path string
+* Fixed README tutorials to use do_require method
+* Added require_all convenience method
+
+03-03-2010
 ----------
 Added a powerful require DSL
-
 
 17-11-2009
 ----------

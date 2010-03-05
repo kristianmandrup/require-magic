@@ -14,26 +14,26 @@ require 'require-dsl'  # to include the Require DSL language only
 Folder.enter 'mira' do |folder| # enter subfolder 'mira'
   `# from new location, enter a subdir`
   folder.enter 'subdir' do |path|  # mira/subdir      
-    folder.all('**/*.rb').except(/sound\/*.rb/).require  
+    folder.all('**/*.rb').except(/sound\/*.rb/).do_require  
   end
 
   folder.enter 'another/subdir' do |path|               
-    folder.all('**/*.rb').require # use file blobs here
+    folder.all('**/*.rb').do_require # use file blobs here
   end
 
   folder.enter 'a_subdir' do |path|         
     `# matching and except are to be used as include and exclude filters
     # they each take a list containing regular expressions and strings
     # string arguments are postfixed with .rb internally if not present`  
-    folder.all('blip/**/*.rb').matching(/_mixin.rb/, /.*\/power/).except(/sound/, /disco/).require
+    folder.all('blip/**/*.rb').matching(/_mixin.rb/, /.*\/power/).except(/sound/, /disco/).do_require
 
     folder.enter 'sub_a' do |path|         
       folder.enter 'sub_b' do |path| # a_subdir/sub_a/sub_b         
-        folder.all('grusch/**/*.rb').require
+        folder.all('grusch/**/*.rb').do_require
       end
 
     end
-    folder.all.require    
+    folder.all.do_require    
   end
 end  
 </pre>
@@ -44,8 +44,8 @@ If no argument, current path is used as initial folder
 require 'require-me' # include both the static require helpers and the DSL require language  
   
 Folder.enter do |folder| # use current path as folder
-  folder.all('**/*.rb').require
-  folder.enter 'game' do |path|
+  folder.enter 'game' do |f|
+    folder.require_all # require all .rb files within this folder!  
 
     `# use static require functions`
     Require.base_path path # set base path to use for Require
@@ -55,7 +55,7 @@ Folder.enter do |folder| # use current path as folder
      
     list = path.all('**/*.rb')    
     puts list.matching('sound', 'network').except(/sound/).show_require(:relative)
-    list.matching('sound', 'network').except(/sound/).require
+    list.matching('sound', 'network').except(/sound/).do_require
   end
 end
 </pre>

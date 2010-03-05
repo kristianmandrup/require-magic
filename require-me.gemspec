@@ -4,21 +4,21 @@
 # -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
-  s.name = %q{require-magic}
-  s.version = "0.5.2"
+  s.name = %q{require-me}
+  s.version = "0.5.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-03-03}
+  s.date = %q{2010-03-05}
   s.description = %q{Lets you easily define how to include hierarchies of ruby files, and also apply inclusion/exclusion filters for what to include}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
     "LICENSE",
-    "README.textile"
+    "README.markdown"
   ]
   s.files = [
     "lib/require-dsl.rb",
-    "lib/require-magic.rb",
+    "lib/require-me.rb",
     "lib/util/util.rb"
   ]
   s.homepage = %q{http://github.com/kristianmandrup/require-magic}
