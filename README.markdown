@@ -44,7 +44,7 @@ If no argument, current path is used as initial folder
 require 'require-me' # include both the static require helpers and the DSL require language  
   
 Folder.enter do |folder| # use current path as folder
-  folder.enter 'game' do |f| # enter doesn't work with special folders '.' and '..' yet
+  folder.enter 'game' do |f|
     folder.require_all # require all .rb files within this folder!  
 
     `# use static require functions`
