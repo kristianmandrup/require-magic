@@ -22,8 +22,9 @@ module Folder
     end
   end
 
-
-
+  def self.require_me(*files)
+    return Magic.new.all(files).dup.extend(MagicList).do_require     
+  end      
   
   module MagicList 
     attr_accessor :base_path
@@ -139,6 +140,10 @@ module Folder
         end
       end
     end
+
+    def require_me(*files)
+      return all(files).dup.extend(MagicList).do_require     
+    end      
         
   end
 end  

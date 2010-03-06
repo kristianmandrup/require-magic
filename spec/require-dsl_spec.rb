@@ -34,8 +34,11 @@ describe "RequireMagic" do
   end
 
   it "works with require_all " do          
-    Folder.enter 'fixtures' do |f|
+    Folder.require_me 'fixtures/game/game.rb'
+    
+    Folder.enter 'fixtures/game' do |f|
       f.require_all
+      f.require_me 'game.rb'
     end            
   end
 
