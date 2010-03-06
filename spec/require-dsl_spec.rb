@@ -29,7 +29,7 @@ describe "RequireMagic" do
   it "works with require_all " do          
     Folder.enter('fixtures/game') do |folder|            
       puts "Current 1:" + folder.current_path          
-      # f.require_all 'graphics', 'network', 'sound'
+      folder.require_all 'graphics', 'network', 'sound'
     end
   end
   

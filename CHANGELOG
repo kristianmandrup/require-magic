@@ -1,5 +1,9 @@
 05-03-2010
 ----------
+TODO: put current path in dir_stack, on exit cd to previous current_path
+
+05-03-2010
+----------
 * Fixed minor issue with enter method to yield self, not path string
 * Fixed README tutorials to use do_require method
 * Added require_all convenience method

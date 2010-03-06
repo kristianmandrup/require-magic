@@ -6,15 +6,11 @@ module Folder
 
   def self.enter(path = '.', &block) 
     m = Magic.new      
-    puts "Path:#{path}"
-    paths = path.split('/')
-    puts paths
-    paths.each{|p| m.enter p}        
+    m.enter path    
     if block_given?
       yield m
-    end                                            
-    puts "Path:#{path}"
-    path.split('/').each{|p| m.exit p }                 
+    end
+    m.exit
   end 
   
   module MagicList 
@@ -94,24 +90,23 @@ module Folder
       @current_path = FileUtils.pwd
     end
     
-    def enter(dir)
-      puts "cd #{dir}"
+    def enter(dir)   
+      path = FileUtils.pwd
+      dir_stack.push path    
       FileUtils.cd dir if !dir.empty?
-      dir_stack.push path = FileUtils.pwd   
-      @current_path = path
+      @current_path = FileUtils.pwd
       if block_given?
         yield self                    
-        exit(dir)              
+        exit              
       end      
       self
     end
 
-    def exit(dir)
+    def exit
       current_path = dir_stack.last
-      old_dir = dir_stack.last if dir_stack.pop 
-      puts "cd .."      
-      # FileUtils.cd old_dir if old_dir               
-      FileUtils.cd '..'
+      old_dir = dir_stack.last 
+      dir_stack.pop 
+      FileUtils.cd old_dir if old_dir               
     end
 
 
