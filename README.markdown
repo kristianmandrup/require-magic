@@ -57,6 +57,14 @@ Folder.enter do |folder| # use current path as folder
     puts list.matching('sound', 'network').except(/sound/).show_require(:relative)
     list.matching('sound', 'network').except(/sound/).do_require
   end
+end  
+
+# Using new 'require_me' method
+
+Folder.require_me 'fixtures/game/game.rb'
+Folder.enter 'fixtures/game' do |f|
+  f.require_all
+  f.require_me 'game.rb'
 end
 </pre>
 
