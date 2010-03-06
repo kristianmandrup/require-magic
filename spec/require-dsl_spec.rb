@@ -28,10 +28,21 @@ describe "RequireMagic" do
   
   it "works with require_all " do          
     Folder.enter('fixtures/game') do |folder|            
-      puts "Current 1:" + folder.current_path          
+      puts "Current 1:" + folder.current_path    
       folder.require_all 'graphics', 'network', 'sound'
     end
   end
+
+  it "works with require_all " do          
+    Folder.enter 'fixtures' do |f|
+      f.require_all
+    end            
+  end
+
+  it "works with require_all " do          
+    Folder.require_all 'fixtures' 
+  end
+
   
   it "works with base folder " do  
     Folder.enter 'fixtures' do |folder|

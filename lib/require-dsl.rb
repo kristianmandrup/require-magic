@@ -12,6 +12,18 @@ module Folder
     end
     m.exit
   end 
+
+  def self.require_all(*folders)
+    return Magic.new.all.dup.extend(MagicList).do_require if folders.empty?
+    folders.each do |folder|
+      enter folder do |f|
+        f.all.dup.extend(MagicList).do_require
+      end
+    end
+  end
+
+
+
   
   module MagicList 
     attr_accessor :base_path
