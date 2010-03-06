@@ -5,11 +5,17 @@ require 'util/util'
 module Folder
 
   def self.enter(path = '.', &block) 
-    m = Magic.new 
-    m.enter path      
-    yield m
-    m.dir_stack.pop 
-  end
+    m = Magic.new      
+    puts "Path:#{path}"
+    paths = path.split('/')
+    puts paths
+    paths.each{|p| m.enter p}        
+    if block_given?
+      yield m
+    end                                            
+    puts "Path:#{path}"
+    path.split('/').each{|p| m.exit p }                 
+  end 
   
   module MagicList 
     attr_accessor :base_path
@@ -88,18 +94,26 @@ module Folder
       @current_path = FileUtils.pwd
     end
     
-    def enter(dir)       
-      FileUtils.cd dir
+    def enter(dir)
+      puts "cd #{dir}"
+      FileUtils.cd dir if !dir.empty?
       dir_stack.push path = FileUtils.pwd   
       @current_path = path
       if block_given?
-        yield self            
-        current_path = dir_stack.last
-        old_dir = dir_stack.last if dir_stack.pop 
-        FileUtils.cd old_dir if old_dir               
+        yield self                    
+        exit(dir)              
       end      
       self
     end
+
+    def exit(dir)
+      current_path = dir_stack.last
+      old_dir = dir_stack.last if dir_stack.pop 
+      puts "cd .."      
+      # FileUtils.cd old_dir if old_dir               
+      FileUtils.cd '..'
+    end
+
 
     def all(*globs)
       globs = '**/*.rb' if globs.empty?      
@@ -110,8 +124,13 @@ module Folder
       list.freeze
     end
 
-    def require_all
-      all.dup.extend(MagicList).do_require
+    def require_all(*folders)
+      return all.dup.extend(MagicList).do_require if folders.empty?
+      folders.each do |folder|
+        enter folder do |f|
+          f.all.dup.extend(MagicList).do_require
+        end
+      end
     end
         
   end
