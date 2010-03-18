@@ -8,14 +8,14 @@ module Require
     attr_accessor :verbose
   end
 
-  def self.recursive(*names, options, &block)
-    options = {} if !options     
+  def self.recursive(*names, opt, &block)
+    opt.kind_of?(String) ? options = {} : options = opt 
     options[:recursive] = true
     names.each{|name| folder(name, options) }
   end
   
-  def self.folders(*names, options)
-    options = {} if !options 
+  def self.folders(*names, opt)
+    opt.kind_of?(String) ? options = {} : options = opt 
     required_files = []
     names.each do |path| 
       options[:root] = path if is_root?(path, options) 
