@@ -3,6 +3,21 @@
 Includes a DSL for requiring files and folders and some also some static utility functions which can be used in combination. 
 These tools in combination facilitates managing requiring various subfolder structures.
 
+## Installation ##
+This gem is also available for installation on gemcutter.
+
+`$ gem install require-me`
+
+## Usage ##
+
+To load the full functionality
+
+`require 'require-me'`
+
+To load only the require DSL functionality
+
+`require 'require-dsl'`
+
 ## Require DSL ##
   
 The following example code demonstrates how to use the Require DSL
