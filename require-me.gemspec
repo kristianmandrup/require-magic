@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{require-me}
-  s.version = "0.6.2"
+  s.version = "0.6.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
-  s.date = %q{2010-03-06}
+  s.date = %q{2010-03-18}
   s.description = %q{Lets you easily define how to include hierarchies of ruby files, and also apply inclusion/exclusion filters for what to include}
   s.email = %q{kmandrup@gmail.com}
   s.extra_rdoc_files = [
@@ -25,14 +25,11 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/kristianmandrup/require-magic}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Facilitates requiring select ruby files in folders}
   s.test_files = [
-    "spec/fixtures/game/game.rb",
-    "spec/fixtures/game/graphics/graphics.rb",
-    "spec/fixtures/game/network/network.rb",
-    "spec/fixtures/game/sound/sound.rb",
     "spec/require-dsl_spec.rb",
+    "spec/require_more_spec.rb",
     "spec/spec_helper.rb",
     "test/test_require_folder.rb",
     "test/test_require_folders.rb",

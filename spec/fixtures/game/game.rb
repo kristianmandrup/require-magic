@@ -1,1 +1,0 @@
-puts "Game was included"

@@ -13,14 +13,40 @@ module Folder
     m.exit
   end 
 
+  def self.enter_here(file, &block) 
+    m = Magic.new      
+    path = File.dirname(file)
+    m.enter path    
+    if block_given?
+      yield m
+    end
+    m.exit
+  end 
+
+
   def self.require_all(*folders)
     return Magic.new.all.dup.extend(MagicList).do_require if folders.empty?
     folders.each do |folder|
-      enter folder do |f|
+      enter folder do |f| 
         f.all.dup.extend(MagicList).do_require
       end
     end
   end
+
+  def self.show_require_all(*folders)
+    return Magic.new.all.dup.extend(MagicList).show_require if folders.empty?
+    folders.each do |folder|
+      enter folder do |f|  
+        f.all.dup.extend(MagicList).show_require
+      end
+    end
+  end
+
+
+  def self.here(file)
+    FileUtils.cd File.dirname(file)
+    self
+  end    
 
   def self.require_me(*files)
     return Magic.new.all(files).dup.extend(MagicList).do_require     
@@ -41,7 +67,7 @@ module Folder
       each do |f|                                                      
         if options.include? :relative                                 
           file_path = File.join(rel_path, f)
-          path = Require::Dir.relative_path(base_path, file_path)
+          path = Require::Directory.relative_path(base_path, file_path)
         end
         path = File.join(base_path, f) if !options.include? :relative
         path
@@ -101,6 +127,10 @@ module Folder
     def initialize      
       @dir_stack = []
       @current_path = FileUtils.pwd
+    end
+
+    def to_s
+      "path: #{current_path}, directory stack: #{dir_stack.inspect}"
     end
     
     def enter(dir)   

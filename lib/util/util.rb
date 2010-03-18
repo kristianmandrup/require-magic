@@ -1,7 +1,7 @@
 require 'pathname'
 
 module Require
-  module Dir
+  module Directory
     def self.relative_path(base_path, path)
       path.gsub! /#{Regexp.escape base_path}/ 
       p1 = Pathname.new base_path

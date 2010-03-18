@@ -84,7 +84,7 @@ protected
       includes_rexp = options[:include]
       excludes_rexp = options[:exclude]      
             
-      Dir.glob(path).each {|f| 
+      ::Dir.glob(path).each {|f| 
         next if excludes_rexp &&  match(f, excludes_rexp)
         if !includes_rexp || match(f, includes_rexp)
           puts_trace "require: #{f}", options
