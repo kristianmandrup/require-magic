@@ -1,6 +1,8 @@
-05-03-2010
+18-03-2010
 ----------
-TODO: put current path in dir_stack, on exit cd to previous current_path
+* Added Folder.enter_here(__FILE__) method
+  - helps game/game.rb work, by changing context after it is required from spec in the spec context so that paths are relative to game and not spec!
+* Put fixtures folder outside spec. It still works!
 
 05-03-2010
 ----------

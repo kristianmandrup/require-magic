@@ -2,7 +2,6 @@
 
 Includes a DSL for requiring files and folders and some also some static utility functions which can be used in combination. 
 These tools in combination facilitates managing requiring various subfolder structures.
-FIXED 
 
 ## Require DSL ##
   
@@ -58,14 +57,27 @@ Folder.enter do |folder| # use current path as folder
     list.matching('sound', 'network').except(/sound/).do_require
   end
 end  
+</pre>
 
-# Using new 'require_me' method
+Using 'require_me' method #
 
-Folder.require_me 'fixtures/game/game.rb'
-Folder.enter 'fixtures/game' do |f|
-  f.require_all
+<pre>
+
+# lib/gamer.rb
+Folder.require_me '../fixtures/game/game.rb'
+Folder.enter '../fixtures/game' do |f|
   f.require_me 'game.rb'
+end   
+
+# Set context in block using 'enter_here' method
+
+# fixtures/game/game.rb
+# ensure context is set relative to here for require statements within block
+Folder.enter_here(__FILE__) do
+  # require graphics within the game folder!
+  Folder.require_me 'graphics/graphics'
 end
+
 </pre>
 
 ## Static helpers ##
