@@ -74,7 +74,19 @@ Folder.enter do |folder| # use current path as folder
 end  
 </pre>
 
-Using 'require_me' method #
+Using 'require_rel' method. This is nice when fx requiring helper files used in test suite files
+
+<pre>
+require File.expand_path(File.dirname(__FILE__) + "../../../spec_helper")
+</pre>
+                                                                        
+Can be replaced with the following in all .rb files under /spec
+
+<pre>
+Folder.require_rel 'spec/spec_helper', __FILE__
+</pre>
+
+Using 'require_me' method
 
 <pre>
 
@@ -159,6 +171,7 @@ Set verbose mode on to see full path of each required file
   Require.folder 'data'  
   Require.verbose = :off  # turn off verbose globally
 </pre>
+
 
 ### Require.recursive ##
 
