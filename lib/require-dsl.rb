@@ -23,6 +23,16 @@ module Folder
     m.exit
   end 
 
+  # Folder.require_rel 'spec/spec_helper', __FILE__
+  # require /spec/spec_helper.rb relative to current file location
+  def self.require_rel(req_file, source)
+    source_dir = File.dirname(source)
+    req_dir = req_file.split('/')[0]  
+    req_file = req_file.split('/')[1]  
+    folders = source_dir.split req_dir
+    path_nav = folders[1].split('/').inject([]){|res, f| res << '..' }.join('/')     
+    require File.expand_path(source_dir + "#{path_nav}/#{req_file}")  
+  end
 
   def self.require_all(*folders)
     return Magic.new.all.dup.extend(MagicList).do_require if folders.empty?
