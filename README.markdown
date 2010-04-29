@@ -3,6 +3,11 @@
 Includes a DSL for requiring files and folders and some also some static utility functions which can be used in combination. 
 These tools in combination facilitates managing requiring various subfolder structures.
 
+## Important ##
+            
+The tool has gone through some more testing and some bugs have been found and fixed so it should now be more stable. 
+The rspec tests in spec/dsl directory demonstrate most of these new features.
+
 ## Installation ##
 This gem is also available for installation on gemcutter.
 

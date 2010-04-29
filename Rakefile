@@ -9,10 +9,10 @@ begin
     gem.email = "kmandrup@gmail.com"
     gem.homepage = "http://github.com/kristianmandrup/require-magic"
     gem.authors = ["Kristian Mandrup"]
-    # gem.add_development_dependency "rspec", ">= 1.2.9"
     gem.files.exclude 'test', 'spec'
     gem.files = FileList['lib/**/*.rb']
-    # gem.add_dependency 
+    gem.add_development_dependency = 'load-me', '>= 0.1.0'
+    gem.add_development_dependency "rspec", ">= 2.0.0"
   end
   # Jeweler::GemcutterTasks.new
 rescue LoadError
