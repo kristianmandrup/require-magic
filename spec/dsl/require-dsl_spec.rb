@@ -63,10 +63,12 @@ describe "RequireMagic" do
   end
   
   it "works with require_rel " do          
+    Folder.require_spec 'blip', __FILE__     
+    
     Folder.require_rel 'spec/blip', __FILE__ 
     Folder.require_rel 'blip', __FILE__ , 'spec' 
 
-    puts Folder.relative_path 'blip', __FILE__ , 'spec' 
+    # puts Folder.relative_path 'blip', __FILE__ , 'spec' 
   
     Folder.rel_base 'spec', __FILE__ do |f|
       f.require_me 'blip'      

@@ -91,6 +91,15 @@ Can be replaced with the following in all .rb files under /spec
 Folder.require_rel 'spec/spec_helper', __FILE__
 </pre>
 
+Or ... using special convenience wrappers
+
+
+<pre>
+Folder.require_spec 'spec_helper', __FILE__  # relative to /spec folder 
+
+Folder.require_test 'spec_helper', __FILE__ # relative to /test folder
+</pre>
+
 Using 'require_me' method
 
 <pre>

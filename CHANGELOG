@@ -1,6 +1,12 @@
+29-05-2010
+-----------          
+Added convenience methods
+* Folder.require_spec : relative from /spec folder
+* Folder.require_test : relative from /test folder
+
 26-04-2010
 ----------
-* Added Folder.require_rel(relative_path, source dir)
+* Added Folder.require_rel(relative_path, source_dir, base_dir)
 
 This is nice when fx requiring test helpers
 Folder.require_rel 'spec/spec_helper', __FILE__

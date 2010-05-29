@@ -55,7 +55,7 @@ module Folder
       relative = {:relative_to => relative_path || ''}
       relative = folders.pop if folders && !folders.empty? && folders.last.kind_of?(Hash)      
 
-      puts "relative_to: #{relative[:relative_to]}"
+      # puts "relative_to: #{relative[:relative_to]}"
 
       if folders.empty?
         files = all.dup.extend(MagicList)
@@ -63,7 +63,7 @@ module Folder
         return files.do_require        
       end
 
-      puts "iterate"
+      # puts "iterate"
       folders.each do |folder|   
         enter folder do |f|   
           file = f.all.dup.extend(MagicList)
@@ -81,8 +81,8 @@ module Folder
     protected            
 
     def relative_to(folder, relative)
-      puts "relative_to: #{relative.inspect}"      
-      puts "relative_to: #{relative[:relative_to]}"      
+      # puts "relative_to: #{relative.inspect}"      
+      # puts "relative_to: #{relative[:relative_to]}"      
       relative[:relative_to] ? File.join(relative[:relative_to], folder) : folder
     end
     

@@ -33,7 +33,7 @@ module Folder
     req_file = File.join(base_dir, req_file) if base_dir
     source_dir = File.dirname(source)
     req_dir = req_file.split('/')[0] || req_file 
-    puts "req_dir: #{req_dir}"
+    # puts "req_dir: #{req_dir}"
     
     req_file = req_file.split('/')[1]  
     folders = source_dir.split req_dir 
@@ -47,6 +47,14 @@ module Folder
   # require /spec/spec_helper.rb relative to current file location
   def self.require_rel(req_file, source, base_dir = nil)
     require relative_path(req_file, source, base_dir)
+  end
+
+  def self.require_spec(req_file, source)
+    require relative_path(req_file, source, 'spec')
+  end
+
+  def self.require_test(req_file, source)
+    require relative_path(req_file, source, 'test')
   end
 
 
