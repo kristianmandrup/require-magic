@@ -14,7 +14,7 @@ begin
     gem.add_development_dependency 'load-me', '>= 0.1.0'
     gem.add_development_dependency "rspec", ">= 2.0.0"
   end
-  # Jeweler::GemcutterTasks.new
+  Jeweler::GemcutterTasks.new
 rescue LoadError
   puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
 end             
