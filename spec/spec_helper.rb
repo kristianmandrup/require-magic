@@ -1,8 +1,11 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'spec'))
-# require 'require-dsl'
 require 'load-me'
-require 'require-me'
 require 'rspec'
 require 'rspec/autorun'
+require 'require-me'
+
+# add fixtures to load path!
+LoadPath.relative_to(__FILE__, '../')
+LoadPath.add('fixtures')             
+
+
+

@@ -1,11 +1,5 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-require 'load-me'
-
-# add fixtures to load path!
-LoadPath.relative_to(__FILE__, '../..')
-LoadPath.add('fixtures')             
-
 describe "RequireMagic" do
   it "Folder.enter works " do          
     Folder.enter '..' do   
