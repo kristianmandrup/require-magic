@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{require-me}
-  s.version = "0.7.2"
+  s.version = "0.7.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Kristian Mandrup"]
@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Facilitates requiring select ruby files in folders}
   s.test_files = [
     "spec/blip.rb",
+     "spec/dsl/blap.rb",
      "spec/dsl/require-dsl_spec.rb",
      "spec/require_more_spec.rb",
      "spec/spec_helper.rb",
