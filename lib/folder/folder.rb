@@ -38,8 +38,12 @@ module Folder
     req_file = req_file.split('/')[1]  
     folders = source_dir.split req_dir 
          
-    folderlist = folders[1] ? folders[1].split('/') : folders[1]    
-    path_nav = folderlist.inject([]){|res, f| res << '..' }.join('/')     
+    folderlist = folders[1] ? folders[1].split('/') : folders[1]
+    if folderlist    
+      path_nav = folderlist.inject([]){|res, f| res << '..' }.join('/')     
+    else
+      path_nav = ''
+    end
     File.expand_path(source_dir + "#{path_nav}/#{req_file}")  
   end
 
