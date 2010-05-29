@@ -11,7 +11,7 @@ begin
     gem.authors = ["Kristian Mandrup"]
     gem.files.exclude 'test', 'spec'
     gem.files = FileList['lib/**/*.rb']
-    gem.add_development_dependency = 'load-me', '>= 0.1.0'
+    gem.add_development_dependency 'load-me', '>= 0.1.0'
     gem.add_development_dependency "rspec", ">= 2.0.0"
   end
   # Jeweler::GemcutterTasks.new
