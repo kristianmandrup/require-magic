@@ -59,6 +59,8 @@ describe "RequireMagic" do
   it "works with require_rel " do          
     Folder.require_spec 'blip', __FILE__     
 
+    Folder.require_all_here __FILE__
+
     Folder.require_rel 'blap', __FILE__ , 'dsl' 
     
     Folder.require_rel 'spec/blip', __FILE__ 

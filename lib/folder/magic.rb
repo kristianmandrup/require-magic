@@ -51,7 +51,8 @@ module Folder
       magic_list(list) 
     end
 
-    def require_all(*folders)
+    def require_all(*folders)  
+      return require_all_here(folders[0]) if folders.size == 1 && folders[0] =~ '.rb'
       relative = {:relative_to => relative_path || ''}
       relative = folders.pop if folders && !folders.empty? && folders.last.kind_of?(Hash)      
 
@@ -78,8 +79,12 @@ module Folder
       file.do_require(relative_path)     
     end      
 
-    protected            
+    def require_all_here(file_name) 
+      require_all File.dirname(file_name)               
+    end
 
+    protected  
+    
     def relative_to(folder, relative)
       # puts "relative_to: #{relative.inspect}"      
       # puts "relative_to: #{relative[:relative_to]}"      

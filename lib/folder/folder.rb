@@ -71,6 +71,10 @@ module Folder
     end
   end
 
+  def self.require_all_here(file_name) 
+    require_all File.dirname(file_name)               
+  end
+
   def self.show_require_all(*folders)
     return Magic.new.all.dup.extend(MagicList).show_require if folders.empty?
     folders.each do |folder|
