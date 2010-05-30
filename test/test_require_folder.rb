@@ -1,4 +1,4 @@
-require 'require-magic'
+require 'require-me'
 require "unit_test_require"
  
 class TestRequireFolder < UnitTestRequire

@@ -61,12 +61,28 @@ module Folder
     require relative_path(req_file, source, 'test')
   end
 
-
-  def self.require_all(*folders)
-    return Magic.new.all.dup.extend(MagicList).do_require if folders.empty?
+  def self.require_all_recursive(*folders)
+    if folders.empty?           
+      magics = Magic.new.all_recursive
+      return magics.dup.extend(MagicList).do_require
+    end
     folders.each do |folder|
       enter folder do |f| 
-        f.all.dup.extend(MagicList).do_require
+        fs = f.all_recursive
+        fs.dup.extend(MagicList).do_require 
+      end
+    end
+  end    
+
+  def self.require_all(*folders)
+    if folders.empty?           
+      magics = Magic.new.all
+      return magics.dup.extend(MagicList).do_require
+    end
+    folders.each do |folder|
+      enter folder do |f| 
+        fs = f.all        
+        fs.dup.extend(MagicList).do_require 
       end
     end
   end
@@ -75,23 +91,49 @@ module Folder
     require_all File.dirname(file_name)               
   end
 
-  def self.show_require_all(*folders)
-    return Magic.new.all.dup.extend(MagicList).show_require if folders.empty?
+  def self.require_all_recursive_here(file_name) 
+    require_all_recursive File.dirname(file_name)               
+  end
+
+  def self.show_require_all_recursive(*folders)  
+    if folders.empty?      
+      magics = Magic.new.all_recursive
+      return magics.dup.extend(MagicList).show_require
+    end
     folders.each do |folder|
-      enter folder do |f|  
-        f.all.dup.extend(MagicList).show_require
+      enter folder do |f| 
+        fs = f.all_recursive
+        fs.dup.extend(MagicList).show_require 
       end
     end
   end
 
+  def self.show_require_all(*folders)  
+    if folders.empty?      
+      magics = Magic.new.all
+      return magics.dup.extend(MagicList).show_require
+    end
+    folders.each do |folder|
+      enter folder do |f| 
+        fs = f.all        
+        fs.dup.extend(MagicList).show_require 
+      end
+    end
+  end
 
   def self.here(file)
     FileUtils.cd File.dirname(file)
     self
   end    
 
-  def self.require_me(*files)
-    return Magic.new.all(files).dup.extend(MagicList).do_require     
+  def self.require_me_recursive(*files) 
+    magics = Magic.new.all_recursive(files)    
+    return magics.dup.extend(MagicList).do_require     
+  end
+
+  def self.require_me(*files) 
+    magics = Magic.new.all(files)    
+    return magics.dup.extend(MagicList).do_require     
   end      
   
 

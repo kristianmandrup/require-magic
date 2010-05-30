@@ -15,7 +15,7 @@ describe "RequireMagic" do
   it "just works " do          
     Folder.enter '../../fixtures' do |folder| # oops!
       folder.enter 'game' do |f|
-        list = f.all('**/*.rb')                                                    
+        list = f.all_recursive #('**/*.rb')                                                    
         l1 = list.matching( 'sound', 'network').except(/sound/)
   
         # require fx 'game/network/network.rb'
@@ -81,8 +81,8 @@ describe "RequireMagic" do
         folder.enter 'game' do |f|
           f.relative_to_me # set implicit by default          
           
-          f.require_all        
-          list = f.all # ('**/*.rb')                                                    
+          f.require_all_recursive        
+          list = f.all_recursive # ('**/*.rb')                                                    
           l1 = list.matching( 'sound', 'network').except(/sound/).show_require(:relative).inspect        
           l1.should include("network/network.rb")
   

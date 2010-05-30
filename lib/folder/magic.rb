@@ -45,11 +45,18 @@ module Folder
     end
 
 
-    def all(*globs)
+    def all_recursive(*globs)
       globs = '**/*.rb' if globs.empty?      
       list = FileList.new(globs) 
       magic_list(list) 
     end
+
+    def all(*globs)
+      globs = '*.rb' if globs.empty?      
+      list = FileList.new(globs) 
+      magic_list(list) 
+    end
+
 
     def require_all(*folders)  
       return require_all_here(folders[0]) if folders.size == 1 && folders[0] =~ '.rb'
@@ -74,14 +81,48 @@ module Folder
       end
     end
 
+    def require_all_recursive(*folders)  
+      return require_all_here(folders[0]) if folders.size == 1 && folders[0] =~ '.rb'
+      relative = {:relative_to => relative_path || ''}
+      relative = folders.pop if folders && !folders.empty? && folders.last.kind_of?(Hash)      
+
+      # puts "relative_to: #{relative[:relative_to]}"
+
+      if folders.empty?
+        files = all_recursive.dup.extend(MagicList)
+        files.rel_path = relative[:relative_to]
+        return files.do_require        
+      end
+
+      # puts "iterate"
+      folders.each do |folder|   
+        enter folder do |f|   
+          file = f.all_recursive.dup.extend(MagicList)
+          require_relative_to = relative ? relative_to(folder, relative) : folder                     
+          file.do_require(require_relative_to)
+        end
+      end
+    end
+
+
     def require_me(*files)
       file = all(files).dup.extend(MagicList)
+      file.do_require(relative_path)     
+    end      
+
+    def require_me_recursive(*files)
+      file = all_recursive(files).dup.extend(MagicList)
       file.do_require(relative_path)     
     end      
 
     def require_all_here(file_name) 
       require_all File.dirname(file_name)               
     end
+
+    def require_all_recursive_here(file_name) 
+      require_all_recursive File.dirname(file_name)               
+    end
+
 
     protected  
     
