@@ -59,7 +59,7 @@ module Folder
 
 
     def require_all(*folders)  
-      return require_all_here(folders[0]) if folders.size == 1 && folders[0] =~ '.rb'
+      return require_all_here(folders[0]) if folders.size == 1 && folders[0] =~ /.rb$/
       relative = {:relative_to => relative_path || ''}
       relative = folders.pop if folders && !folders.empty? && folders.last.kind_of?(Hash)      
 
@@ -82,7 +82,7 @@ module Folder
     end
 
     def require_all_recursive(*folders)  
-      return require_all_here(folders[0]) if folders.size == 1 && folders[0] =~ '.rb'
+      return require_all_here(folders[0]) if folders.size == 1 && folders[0] =~ /.rb$/
       relative = {:relative_to => relative_path || ''}
       relative = folders.pop if folders && !folders.empty? && folders.last.kind_of?(Hash)      
 
